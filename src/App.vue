@@ -1,26 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-app-bar>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <!-- Add Vuetify navigation links here -->
+      <v-btn text="Home" to="/" />
+      <v-btn text="About" to="/about" />
+      <v-btn text="Movies" to="/movies" />
+      <v-btn text="Bookings" to="/bookings" />
+      <v-btn text="Add Movie" to="/add-movie" />
+      <v-btn text="Dashboard" to="/dashboard" />
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <router-view />
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+<script setup>
+const pageTitle = "Live Cinema";
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

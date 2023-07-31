@@ -25,48 +25,71 @@
           <MovieCard :movie="movie"></MovieCard>
         </v-col>
       </v-row>
-      <!-- Add New Movie Button -->
-      <v-btn @click="addNewMovie">Add New Movie</v-btn>
+    </v-container>
+  </div>
+
+  <div class="text-center">
+    <v-container>
+      <v-row justify="center">
+        <v-col cols="8">
+          <v-container class="max-width">
+            <v-pagination
+              v-model="currentPage"
+              class="my-4"
+              :length="totalPages"
+              @input="loadMovies"
+              rounded="circle"
+            ></v-pagination>
+          </v-container>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
 
 <script setup>
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 import MovieCard from "../components/MovieCard.vue";
 import axios from "axios";
 import { BASE_API_URL } from "../api/api.js";
 
+const PAGE_SIZE = 8;
+
 let movieList = reactive([]);
 let isLoading = ref(true);
 let failedLoading = ref(false);
+let currentPage = ref(1);
+let totalPages = ref(1);
 
-const addMovie = async (newMovie) => {
+const loadMovies = async () => {
+  isLoading.value = true;
   try {
-    const response = await axios.post(`${BASE_API_URL}/movies`, newMovie);
-    movieList.push(response.data);
+    const { data, headers } = await axios.get(
+      `${BASE_API_URL}/movies?_page=${currentPage.value}&_limit=${PAGE_SIZE}`
+    );
+    movieList = data;
+    isLoading.value = false;
+    const totalCount = headers["x-total-count"];
+    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
   } catch (error) {
-    console.error("Error adding movie===>", error);
+    console.error("Error fetching===>", error);
+    failedLoading.value = true;
+    isLoading.value = false;
   }
 };
 
-const addNewMovie = () => {
-  const newMovie = {
-    id: movieList.length + 1, // Replace this with a proper ID generation logic on the server-side
-    title: "New Movie",
-    year: "2023",
-    runtime: "120 min",
-    poster: "https://example.com/new-movie-poster.jpg",
-  };
-
-  addMovie(newMovie);
-};
+console.log(totalPages.value);
+watch(currentPage, () => {
+  loadMovies();
+});
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get(`${BASE_API_URL}/movies`);
-    movieList = data;
-    isLoading.value = false;
+    const totalCount = (await axios.get(`${BASE_API_URL}/movies`)).headers[
+      "x-total-count"
+    ];
+    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
+    loadMovies();
   } catch (error) {
     console.error("Error fetching===>", error);
     failedLoading.value = true;

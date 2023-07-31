@@ -21,12 +21,31 @@ const buyTicket = () => {
   const { id, title } = movieDetails;
   addBooking(id, title, selectedShowTime.value, selectedQuantity.value);
   console.log(selectedShowTime, selectedQuantity);
+  showSuccessAlert();
 };
 const isBuyButtonDisabled = () => {
   return (
     selectedShowTime.value === "chose" || selectedQuantity.value === "select"
   );
 };
+
+const showSuccessAlert = () => {
+  // Show the success alert
+  // You can use Vuetify's Snackbar or Dialog component for the alert
+  // For simplicity, let's assume you are using the Dialog component
+  // Make sure to declare the `successAlert` ref
+  successAlert.value = true;
+  // Hide the success alert after 5 seconds
+  setTimeout(() => {
+    successAlert.value = false;
+  }, 5000);
+  // Reset the dropdown fields
+  selectedShowTime.value = "chose";
+  selectedQuantity.value = "select";
+};
+
+// Declare the `successAlert` ref to control the success alert display
+const successAlert = ref(false);
 
 onMounted(async () => {
   try {
@@ -177,5 +196,17 @@ const addBooking = async (
         </v-card>
       </v-col>
     </v-row>
+
+    <!-- Vuetify Dialog for the success alert -->
+    <v-dialog v-model="successAlert" max-width="400">
+      <v-card>
+        <v-card-title class="text-h5">Success!</v-card-title>
+        <v-card-text>Thanks for your purchase!</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="successAlert = false">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>

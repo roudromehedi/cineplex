@@ -5,7 +5,7 @@ const Movies=()=>import("../views/MoviesView.vue")
 const NotFound=()=>import("../views/NotFound.vue")
 const MovieDetails=()=>import("../views/movie-details.vue")
 const bookings=()=>import("../views/MovieBookings.vue")
-const AddMovie=()=>import("../views/AddMovie.vue")
+
 const AdminDashboard=()=>import("../views/AdminDashboard.vue")
 
 
@@ -40,12 +40,7 @@ const router = createRouter({
       component: bookings,
       
     },
-    {
-      path: '/add-movie',
-      name: 'addMovie',
-      component: AddMovie,
-      
-    },
+   
     {
       path: '/dashboard',
       name: 'AdminDashboard',

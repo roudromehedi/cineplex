@@ -3,9 +3,18 @@
     <v-app app>
       <v-app-bar app>
         <v-app-bar-nav-icon
-          @click="drawer = true"
+          v-if="!appDrawer"
+          @click="openAppDrawer()"
           class="d-flex d-sm-none"
-        ></v-app-bar-nav-icon>
+        >
+          <v-icon> mdi-menu </v-icon></v-app-bar-nav-icon
+        ><v-app-bar-nav-icon
+          v-else
+          @click="openAppDrawer()"
+          class="d-flex d-sm-none"
+        >
+          <v-icon> mdi-close </v-icon></v-app-bar-nav-icon
+        >
         <v-toolbar-title>CINEPLEX</v-toolbar-title>
         <v-spacer></v-spacer>
 
@@ -28,7 +37,7 @@
         </template>
       </v-app-bar>
 
-      <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-navigation-drawer v-model="appDrawer" absolute temporary>
         <v-list nav dense>
           <v-list-item-group>
             <v-list-item
@@ -60,9 +69,8 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-const drawer = ref(false);
 const router = useRouter();
-
+const appDrawer = ref(false);
 let tab = ref(null);
 
 const items = [
@@ -75,6 +83,10 @@ const items = [
 
 function navigateTo(to) {
   router.push(to);
+}
+function openAppDrawer() {
+  appDrawer.value = !appDrawer.value;
+  console.log(appDrawer.value);
 }
 </script>
 

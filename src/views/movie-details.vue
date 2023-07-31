@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted, defineProps } from "vue";
+import { BASE_API_URL } from "../api/api.js";
 
 import axios from "axios";
 
@@ -30,7 +31,7 @@ const isBuyButtonDisabled = () => {
 onMounted(async () => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/movies/${parseInt(props.id)}`
+      `${BASE_API_URL}/movies/${parseInt(props.id)}`
     );
     movieDetails = response.data;
     isLoading.value = false;
@@ -48,7 +49,7 @@ const addBooking = async (
 ) => {
   try {
     const data = { movieId, title, selectedShowTime, selectedQuantity };
-    await axios.post("http://localhost:8000/bookings", data);
+    await axios.post(`${BASE_API_URL}/bookings`, data);
     console.log("Movie added successfully!");
   } catch (error) {
     console.error("Error adding movie:", error);

@@ -15,7 +15,13 @@
         >
           <v-icon> mdi-close </v-icon></v-app-bar-nav-icon
         >
-        <v-toolbar-title>CINEPLEX</v-toolbar-title>
+        <div class="ms-10 mt-10">
+          <v-img
+            :width="150"
+            src="https://www.pngkey.com/png/full/332-3320380_movie-poster-project-hatchworks-imax-3d-logo-png.png"
+          ></v-img>
+        </div>
+
         <v-spacer></v-spacer>
 
         <v-btn icon>
@@ -27,13 +33,15 @@
         </v-btn>
 
         <template v-slot:extension>
-          <v-tabs v-model="tab" align-with-title class="d-none d-sm-flex">
-            <v-tabs-slider color="yellow"></v-tabs-slider>
+          <div class="ml-auto mr-auto">
+            <v-tabs v-model="tab" class="d-none d-sm-flex">
+              <v-tabs-slider color="yellow"></v-tabs-slider>
 
-            <v-tab v-for="item in items" :key="item" :to="item.to">
-              {{ item.text }}
-            </v-tab>
-          </v-tabs>
+              <v-tab v-for="item in items" :key="item" :to="item.to">
+                {{ item.text }}
+              </v-tab>
+            </v-tabs>
+          </div>
         </template>
       </v-app-bar>
 

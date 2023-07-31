@@ -19,28 +19,41 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div v-if="isLoading"></div>
+  <v-container
+    ><div v-if="isLoading"></div>
 
-  <v-table v-else density="compact">
-    <thead>
-      <tr>
-        <th class="text-left">Id</th>
-        <th class="text-left">Movie Id</th>
-        <th class="text-left">Title</th>
-        <th class="text-left">Show Time</th>
-        <th class="text-left">Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="booking in bookingList" :key="booking.id">
-        <td>{{ booking.id }}</td>
-        <td>{{ booking.movieId }}</td>
-        <td>{{ booking.title }}</td>
-        <td>{{ booking.selectedShowTime }}</td>
-        <td>{{ booking.selectedQuantity }}</td>
-      </tr>
-    </tbody>
-  </v-table>
+    <v-table v-else density="compact" class="backgroundColor textWhite">
+      <thead>
+        <tr>
+          <th class="text-left">Id</th>
+          <th class="text-left">Movie Id</th>
+          <th class="text-left">Title</th>
+          <th class="text-left">Show Time</th>
+          <th class="text-left">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="booking in bookingList" :key="booking.id">
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.movieId }}</td>
+          <td>{{ booking.title }}</td>
+          <td>{{ booking.selectedShowTime }}</td>
+          <td>{{ booking.selectedQuantity }}</td>
+        </tr>
+      </tbody>
+    </v-table></v-container
+  >
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.backgroundColor {
+  background-color: transparent;
+}
+.textWhite {
+  color: white !important;
+}
+::v-deep .v-data-table-header {
+  color: black;
+  background-color: white;
+}
+</style>

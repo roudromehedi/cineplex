@@ -1,26 +1,53 @@
 <script setup>
-import { defineProps } from 'vue'
-defineProps({ movie: Object })
+import { defineProps } from "vue";
+defineProps({ movie: Object });
 </script>
 
 <template>
-  <v-card class="ma-2 pa-2" max-width="344">
-    <v-img :src="movie.poster" height="200px" cover></v-img>
-
-    <v-card-title> {{ movie.title }} </v-card-title>
-
-    <v-card-subtitle> {{ movie.year }} </v-card-subtitle>
-
-    <v-card-actions>
-      <v-btn
+  <div class="ma-2 pa-2">
+    <v-hover v-slot="{ isHovering, props }">
+      <v-card
         :to="{ name: 'MovieDetails', params: { id: movie.id } }"
-        color="orange-lighten-2"
-        variant="text"
+        class="mx-auto cardColor"
+        max-width="344"
+        v-bind="props"
       >
-        Explore
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+        <v-img cover :src="movie.poster"></v-img>
+        <div class="pa-2 ma-2">
+          <v-card-title class="text-white px-0">
+            {{ movie.title }} ({{ movie.year }})
+          </v-card-title>
+          <div class="d-flex">
+            <div>
+              <v-icon size="large">
+                <v-img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/2560px-IMDB_Logo_2016.svg.png"
+                ></v-img
+              ></v-icon>
+              <span class="ml-2 text-white">{{ movie.rating }}</span>
+            </div>
+
+            <div class="ml-3 text-white">
+              <v-icon size="" color="warning" icon="mdi-clock-outline"></v-icon>
+              <span class="ml-2">{{ movie.runtime }}</span>
+            </div>
+          </div>
+        </div>
+
+        <v-overlay
+          :model-value="isHovering"
+          contained
+          scrim="#036358"
+          class="align-center justify-center"
+        >
+        </v-overlay>
+      </v-card>
+    </v-hover>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.cardColor {
+  background-color: #032055;
+}
+</style>

@@ -18,17 +18,17 @@
         <div class="ms-10 mt-10">
           <v-img
             :width="150"
-            src="https://www.pngkey.com/png/full/332-3320380_movie-poster-project-hatchworks-imax-3d-logo-png.png"
+            src="https://www.kinowerbung.de/media/63/10/94/1647336202/Cinedom_Logo_FixHeight-120px_unicolor.png"
           ></v-img>
         </div>
 
         <v-spacer></v-spacer>
 
         <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
+          <v-icon color="white">mdi-magnify</v-icon>
         </v-btn>
 
-        <v-btn icon>
+        <v-btn icon color="white">
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
 
@@ -37,7 +37,12 @@
             <v-tabs v-model="tab" class="d-none d-sm-flex">
               <v-tabs-slider color="yellow"></v-tabs-slider>
 
-              <v-tab v-for="item in items" :key="item" :to="item.to">
+              <v-tab
+                class="text-white"
+                v-for="item in items"
+                :key="item"
+                :to="item.to"
+              >
                 {{ item.text }}
               </v-tab>
             </v-tabs>
@@ -64,8 +69,17 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-main>
-        <v-container>
+      <v-main
+        class="purple-darken-4 backgroundColor"
+        color="purple-darken-4"
+        background-color="black"
+      >
+        <v-container
+          fluid
+          class="background-color px-0 py-0"
+          color="primary"
+          background-color="black"
+        >
           <router-view />
         </v-container>
       </v-main>
@@ -112,5 +126,14 @@ function openAppDrawer() {
     0,
     0.1
   ); /* Add a background color for active items */
+}
+.backgroundColor {
+  background-color: #001232;
+}
+.navBackgroundColor {
+  background-color: #0a1e5e;
+}
+.v-toolbar {
+  background-color: #0a1e5e !important;
 }
 </style>

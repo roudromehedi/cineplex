@@ -1,12 +1,14 @@
 <template>
-  <div class="mb-5">
-    <v-btn @click="openAddMovie" color="success">Add Movie</v-btn>
-    <v-btn @click="openManageMovie" class="ml-2" color="warning"
-      >Manage Movie</v-btn
-    >
-  </div>
-  <AddMovie v-if="addMovie"></AddMovie>
-  <ManageMovie v-if="manageMovie"></ManageMovie>
+  <v-container
+    ><div class="mb-5">
+      <v-btn @click="openAddMovie" color="success">Add Movie</v-btn>
+      <v-btn @click="openManageMovie" class="ml-2" color="warning"
+        >Manage Movie</v-btn
+      >
+    </div>
+    <AddMovie v-if="addMovie"></AddMovie>
+    <ManageMovie v-if="manageMovie"></ManageMovie
+  ></v-container>
 </template>
 
 <script setup>

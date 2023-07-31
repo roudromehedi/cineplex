@@ -34,6 +34,7 @@
         <v-col cols="8">
           <v-container class="max-width">
             <v-pagination
+              color="white"
               v-model="currentPage"
               class="my-4"
               :length="totalPages"

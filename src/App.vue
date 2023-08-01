@@ -100,6 +100,7 @@ const items = [
   { text: "About", to: "/about" },
   { text: "Movies", to: "/movies" },
   { text: "Bookings", to: "/bookings" },
+  { text: "Admin Dashboard", to: "/admin-dashboard" },
   { text: "Dashboard", to: "/dashboard" },
 ];
 

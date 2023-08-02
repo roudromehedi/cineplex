@@ -1,6 +1,6 @@
 <template>
   <div class="col-lg-3 col-md-6 col-12">
-    <div class="card mb-4">
+    <div class="card mb-4 cursor-pointer" @click="navigateTo(navigation)">
       <div class="card-body p-3">
         <div class="row">
           <div class="col-8">
@@ -17,13 +17,9 @@
               </p>
             </div>
           </div>
-          <div
-            v-if="navigation"
-            class="col-4 text-end"
-            @click="navigateTo(navigation)"
-          >
+          <div class="col-4 text-end" @click="navigateTo(navigation)">
             <div
-              class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle cursor-pointer"
+              class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle"
             >
               <i
                 class="ni ni-curved-next text-lg opacity-10"

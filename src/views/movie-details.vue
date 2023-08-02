@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive, onMounted, defineProps } from "vue";
 import { BASE_API_URL } from "../api/api.js";
+import Swal from "sweetalert2";
 
 import axios from "axios";
 
@@ -22,6 +23,11 @@ const buyTicket = () => {
   addBooking(id, title, selectedShowTime.value, selectedQuantity.value);
   console.log(selectedShowTime, selectedQuantity);
   showSuccessAlert();
+  Swal.fire({
+    title: "Thanks for your purchase!!!",
+    icon: "success",
+    confirmButtonText: "Close",
+  });
 };
 const isBuyButtonDisabled = () => {
   return (
@@ -198,7 +204,8 @@ const addBooking = async (
     </v-row>
 
     <!-- Vuetify Dialog for the success alert -->
-    <v-dialog v-model="successAlert" max-width="400">
+
+    <!-- <v-dialog v-model="successAlert" max-width="400">
       <v-card>
         <v-card-title class="text-h5">Success!</v-card-title>
         <v-card-text>Thanks for your purchase!</v-card-text>
@@ -207,6 +214,6 @@ const addBooking = async (
           <v-btn text @click="successAlert = false">Close</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
   </v-container>
 </template>

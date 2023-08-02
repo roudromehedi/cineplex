@@ -149,6 +149,7 @@
 import { ref, onMounted } from "vue";
 import { BASE_API_URL } from "../api/api.js";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const theaterOptions = [1, 2, 9]; // Add available theater options here
 const showTimeOptions = ["7:00 pm", "9:00 pm", "11:00 pm"]; // Add available show time options here
@@ -188,12 +189,27 @@ const updateMovie = async () => {
 
 const deleteMovie = async (id) => {
   try {
-    await axios.delete(`${BASE_API_URL}/movies/${parseInt(id)}`);
-    // Remove the deleted movie from the movieList array (by filtering)
-    movieList.value = movieList.value.filter((movie) => movie.id !== id);
-    console.log(`Movie with ID ${id} deleted successfully.`);
-    // Call loadMovies to update the table with the latest data
-    loadMovies();
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      await axios.delete(`${BASE_API_URL}/movies/${parseInt(id)}`);
+      // Remove the deleted movie from the movieList array (by filtering)
+      movieList.value = movieList.value.filter((movie) => movie.id !== id);
+      console.log(`Movie with ID ${id} deleted successfully.`);
+      // Call loadMovies to update the table with the latest data
+      loadMovies();
+
+      // Show a success Swal popup after successful deletion
+      Swal.fire("Deleted!", "Your file has been deleted.", "success");
+    }
   } catch (error) {
     console.error("Error Deleting", error);
   }

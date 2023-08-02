@@ -27,7 +27,14 @@
             <th class="text-secondary opacity-7"></th>
           </tr>
         </thead>
-        <div v-if="isLoading"></div>
+        <div class="text-center mt-52" v-if="isLoading">
+          <v-progress-circular
+            :size="50"
+            :width="5"
+            indeterminate
+            color="primary"
+          ></v-progress-circular>
+        </div>
         <tbody v-else>
           <tr v-for="movie in movieList" :key="movie.id">
             <td>

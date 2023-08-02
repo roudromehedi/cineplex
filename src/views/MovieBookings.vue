@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import { BASE_API_URL } from "../api/api.js";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 let bookingList = ref([]);
 const isLoading = ref(true);
@@ -22,14 +23,26 @@ const showEditDialog = (booking) => {
 
 const deleteBooking = async (id) => {
   try {
-    await axios.delete(`${BASE_API_URL}/bookings/${parseInt(id)}`);
-    // Remove the deleted booking from the bookingList array (by filtering)
-    bookingList.value = bookingList.value.filter(
-      (booking) => booking.id !== id
-    );
-    console.log(`Booking with ID ${id} deleted successfully.`);
-    // Call loadBookings to update the table with the latest data
-    loadBookings();
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (result.isConfirmed) {
+      await axios.delete(`${BASE_API_URL}/bookings/${parseInt(id)}`);
+      // Remove the deleted booking from the bookingList array (by filtering)
+      bookingList.value = bookingList.value.filter(
+        (booking) => booking.id !== id
+      );
+      console.log(`Booking with ID ${id} deleted successfully.`);
+      // Call loadBookings to update the table with the latest data
+      loadBookings();
+      Swal.fire("Deleted!", "Booking has been deleted.", "success");
+    }
   } catch (error) {
     console.error("Error Deleting", error);
   }

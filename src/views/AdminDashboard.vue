@@ -7,13 +7,13 @@
       >
     </div>
     <AddMovie v-if="addMovie"></AddMovie>
-    <ManageMovie v-if="manageMovie"></ManageMovie
+    <EditMovie v-if="manageMovie"></EditMovie
   ></v-container>
 </template>
 
 <script setup>
 import AddMovie from "./AddMovie.vue";
-import ManageMovie from "./ManageMovie.vue";
+import EditMovie from "./EditMovie.vue";
 import { ref } from "vue";
 
 const addMovie = ref(false);

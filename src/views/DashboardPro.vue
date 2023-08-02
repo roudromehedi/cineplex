@@ -1490,6 +1490,7 @@
               <OverviewCard
                 :movie-list="movieList"
                 :card-title="'Total Movies'"
+                :navigation="'admin-dashboard'"
               ></OverviewCard>
               <OverviewCard
                 :movie-list="theaterList"
@@ -1498,6 +1499,7 @@
               <OverviewCard
                 :movie-list="bookingList"
                 :card-title="'Total Bookings'"
+                :navigation="'bookings'"
               ></OverviewCard>
               <OverviewCard
                 :movie-list="theaterList"
@@ -1655,29 +1657,7 @@
         <div class="row">
           <div class="col-lg-7 mb-4 mb-lg-0">
             <div class="card z-index-2 h-100">
-              <div class="card-header pb-0 pt-3 bg-transparent">
-                <h6 class="text-capitalize">Sales overview</h6>
-                <p class="text-sm mb-0">
-                  <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-                  <span class="font-weight-bold">4% more</span> in 2021
-                </p>
-              </div>
-              <div class="card-body p-3">
-                <div class="chart">
-                  <canvas
-                    id="chart-line"
-                    class="chart-canvas"
-                    height="450"
-                    width="891"
-                    style="
-                      display: block;
-                      box-sizing: border-box;
-                      height: 300px;
-                      width: 594.6px;
-                    "
-                  ></canvas>
-                </div>
-              </div>
+              <MoviesDashboardView></MoviesDashboardView>
             </div>
           </div>
           <div class="col-lg-5">
@@ -3530,6 +3510,7 @@
 
 <script setup>
 import OverviewCard from "@/components/OverviewCard.vue";
+import MoviesDashboardView from "@/components/MoviesDashboardView.vue";
 import { ref, onMounted } from "vue";
 import { BASE_API_URL } from "../api/api.js";
 import axios from "axios";

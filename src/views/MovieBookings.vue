@@ -8,6 +8,16 @@ let bookingList = ref([]);
 const isLoading = ref(true);
 const failedLoading = ref(false);
 
+// async function fetchMovieDetails(id) {
+//   try {
+//     const response = await axios.get(`${BASE_API_URL}/movies/${parseInt(id)}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error Fetching", error);
+//     throw error;
+//   }
+// }
+
 //const cardWidth = ref("100%"); // Set the default width to 100% of the screen
 
 //Add a data property to track the edit dialog visibility and the selected booking for editing
@@ -125,7 +135,11 @@ onMounted(async () => {
               <td>
                 <div class="d-flex px-2 py-1">
                   <div>
-                    <img :src="booking.poster" class="avatar avatar-sm me-3" />
+                    <img
+                      alt="crypto"
+                      :src="`https://source.unsplash.com/random/?Prople&id=${booking.id}`"
+                      class="avatar avatar-sm me-3"
+                    />
                   </div>
                   <div class="d-flex flex-column justify-content-center">
                     <h6 class="mb-0 text-xs">{{ booking.title }}</h6>
@@ -136,12 +150,14 @@ onMounted(async () => {
                 </div>
               </td>
               <td>
-                <p class="text-xs font-weight-bold mb-0">{{ booking.year }}</p>
+                <p class="text-xs font-weight-bold mb-0">
+                  {{ booking.selectedShowTime }}
+                </p>
                 <p class="text-xs text-secondary mb-0">Executive</p>
               </td>
               <td class="align-middle text-center text-sm">
                 <span class="badge badge-sm badge-secondary">{{
-                  booking.runtime
+                  booking.selectedQuantity
                 }}</span>
               </td>
               <td class="align-middle text-center">

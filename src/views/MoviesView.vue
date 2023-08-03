@@ -1,50 +1,52 @@
 <template>
-  <div>
-    <div class="text-center mt-52" v-if="isLoading">
-      <v-progress-circular
-        :size="50"
-        :width="5"
-        indeterminate
-        color="primary"
-      ></v-progress-circular>
+  <div class="mt-15 pt-10">
+    <div>
+      <div class="text-center mt-52" v-if="isLoading">
+        <v-progress-circular
+          :size="50"
+          :width="5"
+          indeterminate
+          color="primary"
+        ></v-progress-circular>
+      </div>
+      <h1 class="text-center mt-52" v-else-if="failedLoading">
+        Failed to load movie, Please try again
+      </h1>
+      <v-container v-else class="">
+        <v-row no-gutters>
+          <v-col
+            v-for="movie in movieList"
+            :key="movie.id"
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+            xs="12"
+          >
+            <MovieCard :movie="movie"></MovieCard>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
-    <h1 class="text-center mt-52" v-else-if="failedLoading">
-      Failed to load movie, Please try again
-    </h1>
-    <v-container v-else class="">
-      <v-row no-gutters>
-        <v-col
-          v-for="movie in movieList"
-          :key="movie.id"
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-          xs="12"
-        >
-          <MovieCard :movie="movie"></MovieCard>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
 
-  <div class="text-center">
-    <v-container>
-      <v-row justify="center">
-        <v-col cols="8">
-          <v-container class="max-width">
-            <v-pagination
-              color="white"
-              v-model="currentPage"
-              class="my-4"
-              :length="totalPages"
-              @input="loadMovies"
-              rounded="circle"
-            ></v-pagination>
-          </v-container>
-        </v-col>
-      </v-row>
-    </v-container>
+    <div class="text-center">
+      <v-container>
+        <v-row justify="center">
+          <v-col cols="8">
+            <v-container class="max-width">
+              <v-pagination
+                color="white"
+                v-model="currentPage"
+                class="my-4"
+                :length="totalPages"
+                @input="loadMovies"
+                rounded="circle"
+              ></v-pagination>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
   </div>
 </template>
 

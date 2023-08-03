@@ -1257,7 +1257,7 @@
     <main class="main-content position-relative border-radius-lg ps">
       <!-- Navbar -->
       <nav
-        class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl z-index-sticky"
+        class="navbar navbar-main navbar-expand-lg px-0 mx-4 mt-10 pt-12 shadow-none border-radius-xl z-index-sticky"
         id="navbarBlur"
         data-scroll="false"
       >

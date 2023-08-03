@@ -52,96 +52,273 @@
     <div v-if="isLoading">Loading.......</div>
 
     <div v-else class="card">
-      <div class="table-responsive">
-        <table class="table align-items-center mb-0">
-          <thead>
-            <tr>
-              <th
-                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                Title
-              </th>
-              <th
-                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
-              >
-                Theateres
-              </th>
-              <th
-                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                Run Time
-              </th>
-              <th
-                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-              >
-                Status
-              </th>
-              <th class="text-secondary opacity-7"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="movie in movieList" :key="movie.id">
-              <td>
-                <div class="d-flex px-2 py-1">
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <!-- Card header -->
+              <div class="card-header pb-0">
+                <div class="d-lg-flex">
                   <div>
-                    <img :src="movie.poster" class="avatar avatar-sm me-3" />
-                  </div>
-                  <div class="d-flex flex-column justify-content-center">
-                    <h6 class="mb-0 text-xs">{{ movie.title }}</h6>
-                    <p class="text-xs text-secondary mb-0">
-                      richard@creative-tim.com
+                    <h5 class="mb-0">All Products</h5>
+                    <p class="text-sm mb-0">
+                      A lightweight, extendable, dependency-free javascript HTML
+                      table plugin.
                     </p>
                   </div>
+                  <div class="ms-auto my-auto mt-lg-0 mt-4">
+                    <div class="ms-auto my-auto">
+                      <a
+                        href="./new-product.html"
+                        class="btn bg-gradient-primary btn-sm mb-0 mr-2"
+                        target="_blank"
+                        >+&nbsp; New Product</a
+                      >
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary btn-sm mb-0 mr-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#import"
+                      >
+                        Import
+                      </button>
+                      <div
+                        class="modal fade"
+                        id="import"
+                        tabindex="-1"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog mt-lg-10">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="ModalLabel">
+                                Import CSV
+                              </h5>
+                              <i
+                                class="fas fa-upload ms-3"
+                                aria-hidden="true"
+                              ></i>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>You can browse your computer for a file.</p>
+                              <input
+                                type="text"
+                                placeholder="Browse file..."
+                                class="form-control mb-3"
+                                onfocus="focused(this)"
+                                onfocusout="defocused(this)"
+                              />
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  id="importCheck"
+                                  checked=""
+                                />
+                                <label
+                                  class="custom-control-label"
+                                  for="importCheck"
+                                  >I accept the terms and conditions</label
+                                >
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn bg-gradient-secondary btn-sm"
+                                data-bs-dismiss="modal"
+                              >
+                                Close
+                              </button>
+                              <button
+                                type="button"
+                                class="btn bg-gradient-primary btn-sm"
+                              >
+                                Upload
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1"
+                        data-type="csv"
+                        type="button"
+                        name="button"
+                      >
+                        Export
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </td>
-              <td>
-                <p class="text-xs font-weight-bold mb-0">{{ movie.year }}</p>
-                <p class="text-xs text-secondary mb-0">Executive</p>
-              </td>
-              <td class="align-middle text-center text-sm">
-                <span class="badge badge-sm badge-secondary">{{
-                  movie.runtime
-                }}</span>
-              </td>
-              <td class="align-middle text-center">
-                <span class="text-secondary text-xs font-weight-bold"
-                  >04/10/21</span
-                >
-              </td>
-              <td class="align-middle">
-                <a
-                  href="javascript:;"
-                  class="font-weight-bold text-xs b text-warning"
-                  data-toggle="tooltip"
-                  data-original-title="Edit user"
-                  @click="showEditDialog(movie)"
-                >
-                  Edit
-                </a>
-                <a
-                  href="javascript:;"
-                  class="text-danger font-weight-bold text-xs ml-2"
-                  data-toggle="tooltip"
-                  data-original-title="Edit user"
-                  @click="deleteMovie(movie.id)"
-                >
-                  Delete
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+              <div class="card-body px-0 pb-0">
+                <div class="table-responsive">
+                  <div
+                    class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns"
+                  >
+                    <div class="dataTable-top">
+                      <div class="dataTable-dropdown">
+                        <label
+                          ><select
+                            class="dataTable-selector"
+                            v-model="PAGE_SIZE"
+                            @change="onPageSizeChange"
+                          >
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                          </select>
+
+                          entries per page</label
+                        >
+                      </div>
+                      <div class="dataTable-search">
+                        <input
+                          class="dataTable-input"
+                          placeholder="Search..."
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div class="dataTable-container">
+                      <table
+                        class="table table-flush dataTable-table"
+                        id="products-list"
+                      >
+                        <thead class="thead-light">
+                          <tr>
+                            <th data-sortable="" style="width: 32.9242%">
+                              <a href="#" class="dataTable-sorter">Product</a>
+                            </th>
+                            <th
+                              data-sortable=""
+                              style="width: 11.8051%"
+                              class=""
+                            >
+                              <a href="#" class="dataTable-sorter">Category</a>
+                            </th>
+                            <th
+                              data-sortable=""
+                              style="width: 9.9639%"
+                              class=""
+                            >
+                              <a href="#" class="dataTable-sorter">Price</a>
+                            </th>
+                            <th data-sortable="" style="width: 12.13%" class="">
+                              <a href="#" class="dataTable-sorter">SKU</a>
+                            </th>
+                            <th
+                              data-sortable=""
+                              style="width: 13.8628%"
+                              class="desc"
+                            >
+                              <a href="#" class="dataTable-sorter">Quantity</a>
+                            </th>
+                            <th data-sortable="" style="width: 12.13%">
+                              <a href="#" class="dataTable-sorter">Status</a>
+                            </th>
+                            <th data-sortable="" style="width: 14.1877%">
+                              <a href="#" class="dataTable-sorter">Action</a>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="movie in movieList" :key="movie.id">
+                            <td>
+                              <div class="d-flex">
+                                <div class="form-check my-auto">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="customCheck11"
+                                    checked=""
+                                  />
+                                </div>
+                                <img
+                                  class="w-10 ms-3"
+                                  src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/ecommerce/yellow-chair.jpg"
+                                  alt="coco"
+                                />
+                                <h6 class="ms-3 my-auto">{{ movie.title }}</h6>
+                              </div>
+                            </td>
+                            <td class="text-sm">{{ movie.year }}</td>
+                            <td class="text-sm">{{ movie.runtime }}</td>
+                            <td class="text-sm">{{ movie.rating }}</td>
+                            <td class="text-sm">{{ movie.genere }}</td>
+                            <td>
+                              <span class="badge badge-danger badge-sm"
+                                >Live</span
+                              >
+                            </td>
+                            <td class="text-sm">
+                              <a
+                                href="javascript:;"
+                                data-bs-toggle="tooltip"
+                                data-bs-original-title="Preview product"
+                              >
+                                <i
+                                  class="fas fa-eye text-secondary"
+                                  aria-hidden="true"
+                                ></i>
+                              </a>
+                              <a
+                                href="javascript:;"
+                                class="mx-3"
+                                data-bs-toggle="tooltip"
+                                data-bs-original-title="Edit product"
+                                @click="showEditDialog(movie)"
+                              >
+                                <i
+                                  class="fas fa-user-edit text-secondary"
+                                  aria-hidden="true"
+                                ></i>
+                              </a>
+                              <a
+                                href="javascript:;"
+                                data-bs-toggle="tooltip"
+                                data-bs-original-title="Delete product"
+                                @click="deleteMovie(movie.id)"
+                              >
+                                <i
+                                  class="fas fa-trash text-secondary"
+                                  aria-hidden="true"
+                                ></i>
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <nav class="dataTable-pagination">
+                      <v-pagination
+                        color="black"
+                        v-model="currentPage"
+                        class="my-4"
+                        :length="totalPages"
+                        @input="loadMovies"
+                        rounded="circle"
+                      ></v-pagination>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <v-pagination
-      color="white"
-      v-model="currentPage"
-      class="my-4"
-      :length="totalPages"
-      @input="loadMovies"
-      rounded="circle"
-    ></v-pagination>
   </div>
 </template>
 
@@ -217,19 +394,19 @@ const deleteMovie = async (id) => {
 
 import { watch } from "vue";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = ref(5);
 let currentPage = ref(1);
 let totalPages = ref(1);
 const loadMovies = async () => {
   isLoading.value = true;
   try {
     const { data, headers } = await axios.get(
-      `${BASE_API_URL}/movies?_page=${currentPage.value}&_limit=${PAGE_SIZE}`
+      `${BASE_API_URL}/movies?_page=${currentPage.value}&_limit=${PAGE_SIZE.value}`
     );
     movieList.value = data;
     isLoading.value = false;
     const totalCount = headers["x-total-count"];
-    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
+    totalPages.value = Math.ceil(totalCount / PAGE_SIZE.value);
   } catch (error) {
     console.error("Error fetching===>", error);
     failedLoading.value = true;
@@ -242,12 +419,17 @@ watch(currentPage, () => {
   loadMovies();
 });
 
+const onPageSizeChange = () => {
+  // Whenever the page size changes, load the movies with the updated PAGE_SIZE
+  loadMovies();
+};
+
 onMounted(async () => {
   try {
     const totalCount = (await axios.get(`${BASE_API_URL}/movies`)).headers[
       "x-total-count"
     ];
-    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
+    totalPages.value = Math.ceil(totalCount / PAGE_SIZE.value);
     loadMovies();
   } catch (error) {
     console.error("Error fetching===>", error);

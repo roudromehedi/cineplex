@@ -36,7 +36,7 @@
                 >
                   <ul class="navbar-nav navbar-nav-hover mx-auto">
                     <li
-                      class="nav-item dropdown mx-2 cursor-pointer"
+                      class="nav-item dropdown mx-2 cursor-pointer py-2"
                       v-for="item in items"
                       :key="item"
                       @click="navigateTo(item.to)"
@@ -89,8 +89,6 @@ const items = [
   { text: "Home", to: "/" },
   { text: "About", to: "/about" },
   { text: "Movies", to: "/movies" },
-  { text: "Bookings", to: "/bookings" },
-  { text: "Admin Dashboard", to: "/admin-dashboard" },
   { text: "Dashboard", to: "/dashboard" },
 ];
 

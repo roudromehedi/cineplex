@@ -1,6 +1,6 @@
 <template>
   <v-container
-    ><div class="mb-5">
+    ><div class="mb-5 mt-15 pt-5">
       <v-btn @click="openAddMovie" color="success">Add Movie</v-btn>
       <v-btn @click="openManageMovie" class="ml-2" color="warning"
         >Manage Movie</v-btn

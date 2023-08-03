@@ -52,18 +52,18 @@
     <div v-if="isLoading">Loading.......</div>
 
     <div v-else class="card">
-      <div class="container-fluid py-4">
+      <div class="container-fluid py-4 px-0">
         <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card shadow-none">
               <!-- Card header -->
               <div class="card-header pb-0">
                 <div class="d-lg-flex">
                   <div>
-                    <h5 class="mb-0">All Products</h5>
+                    <h5 class="mb-0">All Shows</h5>
                     <p class="text-sm mb-0">
-                      A lightweight, extendable, dependency-free javascript HTML
-                      table plugin.
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Esse, unde?
                     </p>
                   </div>
                   <div class="ms-auto my-auto mt-lg-0 mt-4">
@@ -168,7 +168,8 @@
                       <div class="dataTable-dropdown">
                         <label
                           ><select
-                            class="dataTable-selector"
+                            class="form-select form-select-sm"
+                            aria-label=".form-select-sm example"
                             v-model="PAGE_SIZE"
                             @change="onPageSizeChange"
                           >
@@ -198,31 +199,31 @@
                         <thead class="thead-light">
                           <tr>
                             <th data-sortable="" style="width: 32.9242%">
-                              <a href="#" class="dataTable-sorter">Product</a>
+                              <a href="#" class="dataTable-sorter">Title</a>
                             </th>
                             <th
                               data-sortable=""
                               style="width: 11.8051%"
                               class=""
                             >
-                              <a href="#" class="dataTable-sorter">Category</a>
+                              <a href="#" class="dataTable-sorter">Year</a>
                             </th>
                             <th
                               data-sortable=""
                               style="width: 9.9639%"
-                              class=""
+                              class="desc"
                             >
-                              <a href="#" class="dataTable-sorter">Price</a>
+                              <a href="#" class="dataTable-sorter">Run time</a>
                             </th>
                             <th data-sortable="" style="width: 12.13%" class="">
-                              <a href="#" class="dataTable-sorter">SKU</a>
+                              <a href="#" class="dataTable-sorter">Rating</a>
                             </th>
                             <th
                               data-sortable=""
                               style="width: 13.8628%"
-                              class="desc"
+                              class="asc"
                             >
-                              <a href="#" class="dataTable-sorter">Quantity</a>
+                              <a href="#" class="dataTable-sorter">Genere</a>
                             </th>
                             <th data-sortable="" style="width: 12.13%">
                               <a href="#" class="dataTable-sorter">Status</a>
@@ -254,10 +255,14 @@
                             </td>
                             <td class="text-sm">{{ movie.year }}</td>
                             <td class="text-sm">{{ movie.runtime }}</td>
-                            <td class="text-sm">{{ movie.rating }}</td>
+                            <td class="">
+                              <span class="badge badge-warning badge-sm">{{
+                                movie.rating
+                              }}</span>
+                            </td>
                             <td class="text-sm">{{ movie.genere }}</td>
                             <td>
-                              <span class="badge badge-danger badge-sm"
+                              <span class="badge badge-success badge-sm"
                                 >Live</span
                               >
                             </td>
@@ -268,7 +273,7 @@
                                 data-bs-original-title="Preview product"
                               >
                                 <i
-                                  class="fas fa-eye text-secondary"
+                                  class="fas fa-eye text-success"
                                   aria-hidden="true"
                                 ></i>
                               </a>
@@ -280,7 +285,7 @@
                                 @click="showEditDialog(movie)"
                               >
                                 <i
-                                  class="fas fa-user-edit text-secondary"
+                                  class="fas fa-edit text-warning"
                                   aria-hidden="true"
                                 ></i>
                               </a>
@@ -291,7 +296,7 @@
                                 @click="deleteMovie(movie.id)"
                               >
                                 <i
-                                  class="fas fa-trash text-secondary"
+                                  class="fas fa-trash text-danger"
                                   aria-hidden="true"
                                 ></i>
                               </a>

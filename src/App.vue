@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app app>
-      <v-app-bar app>
+      <v-app-bar v-if="navBarOpen" app>
         <v-app-bar-nav-icon
           v-if="!appDrawer"
           @click="openAppDrawer()"
@@ -94,7 +94,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const appDrawer = ref(false);
 let tab = ref(null);
-
+const navBarOpen = true;
 const items = [
   { text: "Home", to: "/" },
   { text: "About", to: "/about" },

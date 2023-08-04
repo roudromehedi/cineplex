@@ -47,10 +47,10 @@
                   <ul class="navbar-nav d-lg-block d-none">
                     <li class="nav-item">
                       <a
-                        href="https://www.creative-tim.com/product/argon-dashboard-pro"
+                        href="https://www.smroudro.com"
                         class="btn btn-sm btn-white mb-0 me-1"
                         onclick="smoothToPricing('pricing-argon')"
-                        >Buy Now</a
+                        >Contact us</a
                       >
                     </li>
                   </ul>

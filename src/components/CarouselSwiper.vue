@@ -2,7 +2,7 @@
   <div v-if="isLoading" class="text-white">Loading</div>
   <div v-else>
     <swiper
-      :slides-per-view="5"
+      :slides-per-view="value"
       :modules="[Navigation, Autoplay]"
       :space-between="30"
       :navigation="true"
@@ -92,6 +92,40 @@ onMounted(async () => {
   loadMovies();
 });
 console.log(movieList);
+
+import { onBeforeUnmount } from "vue";
+
+const screenWidth = ref(0);
+const value = ref(5);
+
+const isSmallScreen = ref(false);
+const isMediumScreen = ref(false);
+
+const handleResize = () => {
+  screenWidth.value = window.innerWidth;
+  isSmallScreen.value = screenWidth.value < 768; // Define your small screen width here
+  isMediumScreen.value = screenWidth.value >= 768 && screenWidth.value < 1024; // Define your medium screen width here
+
+  // Set the value to 2 when the screen is small
+  if (isSmallScreen.value) {
+    value.value = 2;
+  } else {
+    // Reset to 5 when the screen is not small
+    value.value = 5;
+  }
+};
+
+onMounted(() => {
+  // Get the initial screen size
+  screenWidth.value = window.innerWidth;
+  // Add event listener to handle resizing
+  window.addEventListener("resize", handleResize);
+});
+
+onBeforeUnmount(() => {
+  // Remove the event listener when the component is unmounted
+  window.removeEventListener("resize", handleResize);
+});
 </script>
 
 <style>

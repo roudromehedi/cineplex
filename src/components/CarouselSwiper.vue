@@ -108,7 +108,7 @@ const handleResize = () => {
 
   // Set the value to 2 when the screen is small
   if (isSmallScreen.value) {
-    value.value = 2;
+    value.value = 1;
   } else {
     // Reset to 5 when the screen is not small
     value.value = 5;

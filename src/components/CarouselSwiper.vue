@@ -12,34 +12,40 @@
       <!-- Use the "slides" slot to render custom swiper-slide elements -->
       <template #slides>
         <swiper-slide v-for="movie in movieList" :key="movie.id">
-          <div class="0 mb-5">
-            <div class="card shadow-lg mt-5">
-              <div
-                class="card-header mt-n4 mx-3 p-0 bg-transparent position-relative z-index-2"
-              >
-                <a class="d-block blur-shadow-image"
-                  ><img
-                    :src="movie.poster"
-                    alt="img-blur-shadow"
-                    class="img-fluid shadow border-radius-lg image-class"
-                    loading="lazy"
-                /></a>
-              </div>
-              <div
-                class="card-body text-center bg-white border-radius-lg p-3 pt-0"
-              >
-                <h5 class="mt-3 mb-1 d-md-block d-none text-truncate">
-                  {{ movie.title }}
-                </h5>
-
-                <p
-                  class="mb-0 text-xs font-weight-bolder text-info text-gradient text-uppercase text-truncate"
+          <router-link
+            :to="{ name: 'MovieDetails', params: { id: movie.id } }"
+            class="0 mb-5"
+            max-width="344"
+          >
+            <div class="0 mb-5">
+              <div class="card shadow-lg mt-5">
+                <div
+                  class="card-header mt-n4 mx-3 p-0 bg-transparent position-relative z-index-2"
                 >
-                  {{ movie.genere }}
-                </p>
+                  <a class="d-block blur-shadow-image"
+                    ><img
+                      :src="movie.poster"
+                      alt="img-blur-shadow"
+                      class="img-fluid shadow border-radius-lg image-class"
+                      loading="lazy"
+                  /></a>
+                </div>
+                <div
+                  class="card-body text-center bg-white border-radius-lg p-3 pt-0"
+                >
+                  <h5 class="mt-3 mb-1 d-md-block d-none text-truncate">
+                    {{ movie.title }}
+                  </h5>
+
+                  <p
+                    class="mb-0 text-xs font-weight-bolder text-info text-gradient text-uppercase text-truncate"
+                  >
+                    {{ movie.genere }}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </router-link>
         </swiper-slide>
       </template>
     </swiper>

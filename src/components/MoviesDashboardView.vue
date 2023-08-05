@@ -89,7 +89,7 @@ const loadMovies = async () => {
     const { data } = await axios.get(
       `${BASE_API_URL}/movies?_page=${currentPage.value}&_limit=${PAGE_SIZE}`
     );
-    movieList = data;
+    movieList.value = data;
     isLoading.value = false;
     console.log("First Page", movieList);
   } catch (error) {

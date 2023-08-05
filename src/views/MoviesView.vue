@@ -51,14 +51,14 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch } from "vue";
 import MovieCard from "../components/MovieCard.vue";
 import axios from "axios";
 import { BASE_API_URL } from "../api/api.js";
 
 const PAGE_SIZE = 8;
 
-let movieList = reactive([]);
+let movieList = ref([]);
 let isLoading = ref(true);
 let failedLoading = ref(false);
 let currentPage = ref(1);
@@ -70,7 +70,7 @@ const loadMovies = async () => {
     const { data, headers } = await axios.get(
       `${BASE_API_URL}/movies?_page=${currentPage.value}&_limit=${PAGE_SIZE}`
     );
-    movieList = data;
+    movieList.value = data;
     isLoading.value = false;
     const totalCount = headers["x-total-count"];
     totalPages.value = Math.ceil(totalCount / PAGE_SIZE);

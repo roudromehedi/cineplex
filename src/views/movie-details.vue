@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted, defineProps } from "vue";
+import { ref, onMounted, defineProps } from "vue";
 import { BASE_API_URL } from "../api/api.js";
 import Swal from "sweetalert2";
 
@@ -12,7 +12,7 @@ const props = defineProps({
   },
 });
 
-let movieDetails = reactive({});
+let movieDetails = ref({});
 let isLoading = ref(true);
 
 const selectedShowTime = ref("chose"); // Set the default value for selectedShowTime
@@ -58,7 +58,7 @@ onMounted(async () => {
     const response = await axios.get(
       `${BASE_API_URL}/movies/${parseInt(props.id)}`
     );
-    movieDetails = response.data;
+    movieDetails.value = response.data;
     isLoading.value = false;
   } catch (error) {
     console.error("Error Fetching", error);

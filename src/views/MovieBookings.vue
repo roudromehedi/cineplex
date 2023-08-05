@@ -100,7 +100,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <v-container
+  <v-container class="mt-15 pt-10"
     ><div v-if="isLoading"></div>
     <div v-else class="card">
       <div class="table-responsive">

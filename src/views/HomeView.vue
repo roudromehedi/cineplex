@@ -3,7 +3,7 @@
     <div
       class="page-header min-vh-75"
       style="
-        background-image: url(https://images.unsplash.com/photo-1501446529957-6226bd447c46?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2378&q=80);
+        background-image: url(https://images.unsplash.com/photo-1538947151057-dfe933d688d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80);
       "
       loading="lazy"
     >
@@ -94,12 +94,18 @@
         <div
           class="col-lg-6 text-end d-flex flex-column justify-content-center"
         >
-          <button
-            type="button"
-            class="btn bg-gradient-info mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2"
+          <router-link
+            :to="{ name: 'movies', params: {} }"
+            class="0 mb-5"
+            max-width="344"
           >
-            Show All
-          </button>
+            <button
+              type="button"
+              class="btn bg-gradient-info mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2"
+            >
+              Show All
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -128,12 +134,18 @@
         <div
           class="col-lg-6 text-end d-flex flex-column justify-content-center"
         >
-          <button
-            type="button"
-            class="btn bg-gradient-info mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2"
+          <router-link
+            :to="{ name: 'movies', params: {} }"
+            class="0 mb-5"
+            max-width="344"
           >
-            Show All
-          </button>
+            <button
+              type="button"
+              class="btn bg-gradient-info mb-0 ms-lg-auto me-lg-0 me-auto mt-lg-0 mt-2"
+            >
+              Show All
+            </button>
+          </router-link>
         </div>
       </div>
     </div>

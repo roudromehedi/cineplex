@@ -18,10 +18,10 @@
             v-for="movie in movieList"
             :key="movie.id"
             cols="12"
+            xs="12"
             sm="6"
             md="4"
             lg="3"
-            xs="12"
           >
             <MovieCard :movie="movie"></MovieCard>
           </v-col>

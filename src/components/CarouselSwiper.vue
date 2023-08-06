@@ -26,7 +26,7 @@
                     ><img
                       :src="movie.poster"
                       alt="img-blur-shadow"
-                      class="img-fluid shadow border-radius-lg image-class"
+                      class="img-fluid shadow border-radius-lg image-class w-100"
                       loading="lazy"
                   /></a>
                 </div>

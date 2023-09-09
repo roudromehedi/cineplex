@@ -77,11 +77,14 @@
         </v-container>
       </v-main>
     </v-app>
+    <!-- -------- START FOOTER 1 w/ COMPANY DESCRIPTION AND 4 COLS ------- -->
+    <FooterView></FooterView>
   </div>
 </template>
 
 <script setup>
 import { useRouter } from "vue-router";
+import FooterView from "./components/footerView.vue";
 
 const router = useRouter();
 

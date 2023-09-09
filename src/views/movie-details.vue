@@ -101,7 +101,7 @@ const addBooking = async (
             <v-row>
               <v-col lg="5" md="6" class="text-center">
                 <v-img
-                  class="w-100 border-radius-lg shadow-lg mx-auto"
+                  class="w-60 border-radius-lg shadow-lg mx-auto"
                   :src="movieDetails.poster"
                 >
                 </v-img>

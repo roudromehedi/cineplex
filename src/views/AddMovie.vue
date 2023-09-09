@@ -1,5 +1,11 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
+  <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+    color="white"
+    class="text-white"
+  >
     <v-text-field
       v-model="movieData.title"
       :rules="nameRules"

@@ -186,9 +186,17 @@
                       <div class="dataTable-search">
                         <input
                           class="dataTable-input"
+                          v-model="searchQuery"
                           placeholder="Search..."
                           type="text"
                         />
+                        <button
+                          type="button"
+                          class="btn btn-outline-primary btn-sm mb-0 ml-2"
+                          @click="loadMovies"
+                        >
+                          Search
+                        </button>
                       </div>
                     </div>
                     <div class="dataTable-container">
@@ -332,16 +340,13 @@ import { ref, onMounted } from "vue";
 import { BASE_API_URL } from "../api/api.js";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { watch } from "vue";
 
-const theaterOptions = [1, 2, 9]; // Add available theater options here
-const showTimeOptions = ["7:00 pm", "9:00 pm", "11:00 pm"]; // Add available show time options here
+const theaterOptions = [1, 2, 9]; //  available theater options
+const showTimeOptions = ["7:00 pm", "9:00 pm", "11:00 pm"]; //  available show time options
 let movieList = ref([]);
 const isLoading = ref(true);
 const failedLoading = ref(false);
-
-//const cardWidth = ref("100%"); // Set the default width to 100% of the screen
-
-//Add a data property to track the edit dialog visibility and the selected movie for editing
 const editDialogVisible = ref(false);
 const editedMovie = ref({});
 let selectedMovieId = null;
@@ -397,17 +402,22 @@ const deleteMovie = async (id) => {
   }
 };
 
-import { watch } from "vue";
-
 const PAGE_SIZE = ref(5);
 let currentPage = ref(1);
 let totalPages = ref(1);
+const searchQuery = ref("");
+
 const loadMovies = async () => {
   isLoading.value = true;
   try {
-    const { data, headers } = await axios.get(
-      `${BASE_API_URL}/movies?_page=${currentPage.value}&_limit=${PAGE_SIZE.value}`
-    );
+    let apiUrl = `${BASE_API_URL}/movies?_page=${currentPage.value}&_limit=${PAGE_SIZE.value}`;
+
+    // Add search query to the API URL if it's provided
+    if (searchQuery.value) {
+      apiUrl += `&q=${encodeURIComponent(searchQuery.value)}`;
+    }
+
+    const { data, headers } = await axios.get(apiUrl);
     movieList.value = data;
     isLoading.value = false;
     const totalCount = headers["x-total-count"];

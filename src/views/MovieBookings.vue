@@ -1,104 +1,3 @@
-<script setup>
-import { ref, onMounted } from "vue";
-import { BASE_API_URL } from "../api/api.js";
-import axios from "axios";
-import Swal from "sweetalert2";
-
-let bookingList = ref([]);
-const isLoading = ref(true);
-const failedLoading = ref(false);
-
-// async function fetchMovieDetails(id) {
-//   try {
-//     const response = await axios.get(`${BASE_API_URL}/movies/${parseInt(id)}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error Fetching", error);
-//     throw error;
-//   }
-// }
-
-//const cardWidth = ref("100%"); // Set the default width to 100% of the screen
-
-//Add a data property to track the edit dialog visibility and the selected booking for editing
-const editDialogVisible = ref(false);
-const editedBooking = ref({});
-
-const showEditDialog = (booking) => {
-  // Open the dialog and set the selected booking for editing
-  editDialogVisible.value = true;
-
-  editedBooking.value = { ...booking }; // Create a copy of the selected booking to edit
-};
-
-const deleteBooking = async (id) => {
-  try {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    });
-    if (result.isConfirmed) {
-      await axios.delete(`${BASE_API_URL}/bookings/${parseInt(id)}`);
-      // Remove the deleted booking from the bookingList array (by filtering)
-      bookingList.value = bookingList.value.filter(
-        (booking) => booking.id !== id
-      );
-      console.log(`Booking with ID ${id} deleted successfully.`);
-      // Call loadBookings to update the table with the latest data
-      loadBookings();
-      Swal.fire("Deleted!", "Booking has been deleted.", "success");
-    }
-  } catch (error) {
-    console.error("Error Deleting", error);
-  }
-};
-
-import { watch } from "vue";
-
-const PAGE_SIZE = 8;
-let currentPage = ref(1);
-let totalPages = ref(1);
-const loadBookings = async () => {
-  isLoading.value = true;
-  try {
-    const { data, headers } = await axios.get(
-      `${BASE_API_URL}/bookings?_page=${currentPage.value}&_limit=${PAGE_SIZE}`
-    );
-    bookingList.value = data;
-    isLoading.value = false;
-    const totalCount = headers["x-total-count"];
-    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
-  } catch (error) {
-    console.error("Error fetching===>", error);
-    failedLoading.value = true;
-    isLoading.value = false;
-  }
-};
-
-console.log(totalPages.value);
-watch(currentPage, () => {
-  loadBookings();
-});
-
-onMounted(async () => {
-  try {
-    const totalCount = (await axios.get(`${BASE_API_URL}/bookings`)).headers[
-      "x-total-count"
-    ];
-    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
-    loadBookings();
-  } catch (error) {
-    console.error("Error fetching===>", error);
-    failedLoading.value = true;
-    isLoading.value = false;
-  }
-});
-</script>
 <template>
   <v-container class="mt-15 pt-10"
     ><div v-if="isLoading"></div>
@@ -201,6 +100,92 @@ onMounted(async () => {
     ></v-pagination>
   </v-container>
 </template>
+<script setup>
+import { ref, onMounted } from "vue";
+import { BASE_API_URL } from "../api/api.js";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+let bookingList = ref([]);
+const isLoading = ref(true);
+const failedLoading = ref(false);
+const editDialogVisible = ref(false);
+const editedBooking = ref({});
+
+const showEditDialog = (booking) => {
+  // Open the dialog and set the selected booking for editing
+  editDialogVisible.value = true;
+  editedBooking.value = { ...booking }; // Create a copy of the selected booking to edit
+};
+
+const deleteBooking = async (id) => {
+  try {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (result.isConfirmed) {
+      await axios.delete(`${BASE_API_URL}/bookings/${parseInt(id)}`);
+      // Remove the deleted booking from the bookingList array (by filtering)
+      bookingList.value = bookingList.value.filter(
+        (booking) => booking.id !== id
+      );
+      console.log(`Booking with ID ${id} deleted successfully.`);
+      // Call loadBookings to update the table with the latest data
+      loadBookings();
+      Swal.fire("Deleted!", "Booking has been deleted.", "success");
+    }
+  } catch (error) {
+    console.error("Error Deleting", error);
+  }
+};
+
+import { watch } from "vue";
+
+const PAGE_SIZE = 8;
+let currentPage = ref(1);
+let totalPages = ref(1);
+const loadBookings = async () => {
+  isLoading.value = true;
+  try {
+    const { data, headers } = await axios.get(
+      `${BASE_API_URL}/bookings?_page=${currentPage.value}&_limit=${PAGE_SIZE}`
+    );
+    bookingList.value = data;
+    isLoading.value = false;
+    const totalCount = headers["x-total-count"];
+    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
+  } catch (error) {
+    console.error("Error fetching===>", error);
+    failedLoading.value = true;
+    isLoading.value = false;
+  }
+};
+
+console.log(totalPages.value);
+watch(currentPage, () => {
+  loadBookings();
+});
+
+onMounted(async () => {
+  try {
+    const totalCount = (await axios.get(`${BASE_API_URL}/bookings`)).headers[
+      "x-total-count"
+    ];
+    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
+    loadBookings();
+  } catch (error) {
+    console.error("Error fetching===>", error);
+    failedLoading.value = true;
+    isLoading.value = false;
+  }
+});
+</script>
 
 <style lang="scss" scoped>
 .backgroundColor {

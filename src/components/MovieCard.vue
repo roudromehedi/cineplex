@@ -8,7 +8,7 @@
         class="0 mb-5"
         :to="{ name: 'MovieDetails', params: { id: movie.id } }"
         max-width="344"
-        v-bind="props"
+        v-bind="movie"
       >
         <div class="card shadow-lg mt-5">
           <div

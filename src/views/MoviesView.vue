@@ -1,7 +1,7 @@
 <template>
   <div class="mt-15 pt-10">
     <div>
-      <div class="text-center mt-52" v-if="isLoading">
+      <div class="text-center mt-52" v-if="movieStore.isLoading">
         <v-progress-circular
           :size="50"
           :width="5"
@@ -9,13 +9,13 @@
           color="primary"
         ></v-progress-circular>
       </div>
-      <h1 class="text-center mt-52" v-else-if="failedLoading">
+      <h1 class="text-center mt-52" v-else-if="movieStore.failedLoading">
         Failed to load movie, Please try again
       </h1>
       <v-container v-else class="">
         <v-row no-gutters>
           <v-col
-            v-for="movie in movieList"
+            v-for="movie in movieStore.movies"
             :key="movie.id"
             cols="12"
             xs="12"
@@ -51,53 +51,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
+import { useMovieStore } from "../stores/movies.js";
 import MovieCard from "../components/MovieCard.vue";
-import axios from "axios";
-import { BASE_API_URL } from "../api/api.js";
 
+const movieStore = useMovieStore();
 const PAGE_SIZE = 8;
 
-let movieList = ref([]);
-let isLoading = ref(true);
-let failedLoading = ref(false);
-let currentPage = ref(1);
-let totalPages = ref(1);
+const isLoading = ref(true);
+const currentPage = ref(1);
+const totalPages = ref(1);
 
 const loadMovies = async () => {
   isLoading.value = true;
   try {
-    const { data, headers } = await axios.get(
-      `${BASE_API_URL}/movies?_page=${currentPage.value}&_limit=${PAGE_SIZE}`
-    );
-    movieList.value = data;
-    isLoading.value = false;
-    const totalCount = headers["x-total-count"];
-    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
+    await movieStore.getMovies(currentPage.value, PAGE_SIZE);
+    totalPages.value = movieStore.totalPages;
   } catch (error) {
     console.error("Error fetching===>", error);
-    failedLoading.value = true;
     isLoading.value = false;
   }
 };
-
-console.log(totalPages.value);
 watch(currentPage, () => {
   loadMovies();
 });
+console.log(currentPage.value);
 
 onMounted(async () => {
-  try {
-    const totalCount = (await axios.get(`${BASE_API_URL}/movies`)).headers[
-      "x-total-count"
-    ];
-    totalPages.value = Math.ceil(totalCount / PAGE_SIZE);
-    loadMovies();
-  } catch (error) {
-    console.error("Error fetching===>", error);
-    failedLoading.value = true;
-    isLoading.value = false;
-  }
+  loadMovies();
 });
 </script>
 

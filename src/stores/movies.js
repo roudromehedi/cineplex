@@ -7,6 +7,7 @@ import { BASE_API_URL } from "../api/api.js";
 export const useMovieStore = defineStore("movies", {
   state: () => ({
     movies: [],
+    movie: {},
     isLoading: false,
     query: "",
     singleMovie: {},
@@ -41,11 +42,18 @@ export const useMovieStore = defineStore("movies", {
         this.isLoading = false;
       }
     },
-    // movieStore.js
 
-    async setCurrentPage(page) {
-      this.currentPage = page;
-      await this.getMovies(); // Load movies for the new page
+    async getSingleMovie(id) {
+      try {
+        const response = await axios.get(
+          `${BASE_API_URL}/movies/${parseInt(id)}`
+        );
+        this.movie = response.data;
+        this.isLoading = false;
+      } catch (error) {
+        console.error("Error Fetching", error);
+        this.isLoading = false;
+      }
     },
   },
 });

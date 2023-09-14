@@ -92,6 +92,7 @@ const items = [
   { text: "Home", to: "/" },
   { text: "About", to: "/about" },
   { text: "Movies", to: "/movies" },
+  { text: "Theateres", to: "/theaters" },
   { text: "Dashboard", to: "/dashboard" },
 ];
 

@@ -58,6 +58,7 @@
                   :ripple="true"
                   outlined
                   class=""
+                  href="https://www.youtube.com/watch?v=d9MyW72ELq0"
                   color="teal"
                   >Watch Trailer
                   <v-icon end icon="mdi-play" color="white" size=""></v-icon

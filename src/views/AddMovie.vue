@@ -85,7 +85,7 @@ const movieData = reactive({
   showTime: [],
 });
 
-const theaterOptions = [1, 2, 9]; // Add available theater options here
+const theaterOptions = [1, 2, 3, 4]; // Add available theater options here
 const showTimeOptions = ["7:00 pm", "9:00 pm", "11:00 pm"]; // Add available show time options here
 
 const selectedTheaters = ref([]);

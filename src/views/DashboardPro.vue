@@ -9,7 +9,7 @@
               <OverviewCard
                 :movie-list="movieList"
                 :card-title="'Total Movies'"
-                :navigation="'admin-dashboard'"
+                :navigation="'manage-movies'"
               ></OverviewCard>
               <OverviewCard
                 :movie-list="theaterList"
@@ -1886,8 +1886,6 @@ import { ref, onMounted } from "vue";
 import { BASE_API_URL } from "../api/api.js";
 import axios from "axios";
 
-//const theaterOptions = [1, 2, 9]; // Add available theater options here
-//const showTimeOptions = ["7:00 pm", "9:00 pm", "11:00 pm"]; // Add available show time options here
 const movieList = ref([]);
 const theaterList = ref([]);
 const bookingList = ref([]);

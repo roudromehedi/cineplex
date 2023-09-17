@@ -1,11 +1,5 @@
 <template>
-  <v-form
-    ref="form"
-    v-model="valid"
-    lazy-validation
-    color="white"
-    class="text-white"
-  >
+  <v-form ref="form" v-model="valid" lazy-validation color="white">
     <v-text-field
       v-model="movieData.title"
       :rules="nameRules"
@@ -137,4 +131,37 @@ const isFormIncomplete = computed(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.v-form {
+  margin: 0 auto;
+}
+
+.v-form {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.v-text-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.v-btn {
+  min-width: 100px;
+}
+
+.v-btn + .v-btn {
+  margin-left: 10px;
+}
+
+.v-select {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.v-form > *:last-child {
+  margin-bottom: 0;
+}
+</style>

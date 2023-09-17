@@ -142,7 +142,7 @@ const selectedShowTime = ref("chose"); // Set the default value for selectedShow
 const selectedQuantity = ref("select"); // Set the default value for selectedQuantity
 
 const buyTicket = () => {
-  const { id, title } = movieDetails;
+  const { id, title } = movieDetails.value;
   addBooking(id, title, selectedShowTime.value, selectedQuantity.value);
   console.log(selectedShowTime, selectedQuantity);
   showSuccessAlert();
@@ -194,7 +194,7 @@ const addBooking = async (
   try {
     const data = { movieId, title, selectedShowTime, selectedQuantity };
     await axios.post(`${BASE_API_URL}/bookings`, data);
-    console.log("Movie added successfully!");
+    console.log("Movie added successfully!", data);
   } catch (error) {
     console.error("Error adding movie:", error);
   }

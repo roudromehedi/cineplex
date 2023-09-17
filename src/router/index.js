@@ -5,7 +5,7 @@ const Movies = () => import("../views/MoviesView.vue");
 const NotFound = () => import("../views/NotFound.vue");
 const MovieDetails = () => import("../views/movie-details.vue");
 const Bookings = () => import("../views/MovieBookings.vue");
-const AdminDashboard = () => import("../views/AdminDashboard.vue");
+const ManageMovies = () => import("../views/ManageMovies.vue");
 const Dashboard = () => import("../views/DashboardPro.vue");
 const Theaters = () => import("../views/TheatreView.vue");
 
@@ -45,9 +45,9 @@ const router = createRouter({
     },
 
     {
-      path: "/admin-dashboard",
-      name: "AdminDashboard",
-      component: AdminDashboard,
+      path: "/manage-movies",
+      name: "ManageMovies",
+      component: ManageMovies,
     },
     {
       path: "/dashboard",

@@ -1,7 +1,8 @@
 <template>
   <v-container class="mt-15 pt-10"
-    ><div v-if="isLoading"></div>
+    ><div v-if="isLoading">Loading bookings.....</div>
     <div v-else class="card">
+      <div class="d-flex justify-content-center my-5">Manage Bookings</div>
       <div class="table-responsive">
         <table class="table align-items-center mb-0">
           <thead>
@@ -19,7 +20,7 @@
               <th
                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Run Time
+                No. of tickets
               </th>
               <th
                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
@@ -42,9 +43,7 @@
                   </div>
                   <div class="d-flex flex-column justify-content-center">
                     <h6 class="mb-0 text-xs">{{ booking.title }}</h6>
-                    <p class="text-xs text-secondary mb-0">
-                      richard@creative-tim.com
-                    </p>
+                    <p class="text-xs text-secondary mb-0">4k</p>
                   </div>
                 </div>
               </td>
@@ -60,9 +59,7 @@
                 }}</span>
               </td>
               <td class="align-middle text-center">
-                <span class="text-secondary text-xs font-weight-bold"
-                  >04/10/21</span
-                >
+                <span class="text-red text-xs font-weight-bold">Live</span>
               </td>
               <td class="align-middle">
                 <a
@@ -105,6 +102,7 @@ import { ref, onMounted } from "vue";
 import { BASE_API_URL } from "../api/api.js";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { watch } from "vue";
 
 let bookingList = ref([]);
 const isLoading = ref(true);
@@ -131,10 +129,6 @@ const deleteBooking = async (id) => {
     });
     if (result.isConfirmed) {
       await axios.delete(`${BASE_API_URL}/bookings/${parseInt(id)}`);
-      // Remove the deleted booking from the bookingList array (by filtering)
-      bookingList.value = bookingList.value.filter(
-        (booking) => booking.id !== id
-      );
       console.log(`Booking with ID ${id} deleted successfully.`);
       // Call loadBookings to update the table with the latest data
       loadBookings();
@@ -144,8 +138,6 @@ const deleteBooking = async (id) => {
     console.error("Error Deleting", error);
   }
 };
-
-import { watch } from "vue";
 
 const PAGE_SIZE = 8;
 let currentPage = ref(1);

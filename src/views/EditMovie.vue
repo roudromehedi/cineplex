@@ -454,7 +454,84 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
+.movie-card {
+  margin-bottom: 20px;
+}
+
+.movie-poster {
+  width: 100%;
+  max-height: 250px;
+}
+
+.v-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.v-form {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.v-text-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.v-select {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.v-btn {
+  min-width: 100px;
+}
+
+.v-btn + .v-btn {
+  margin-left: 10px;
+}
+
+.v-form > *:last-child {
+  margin-bottom: 0;
+}
+
+.v-dialog {
+  max-width: 600px;
+}
+
+.v-dialog .v-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.v-dialog .v-text-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.v-dialog .v-card-actions {
+  justify-content: flex-end;
+}
+
+.loading-message {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 20px;
+}
+
 .movie-card {
   margin-bottom: 20px;
 }
